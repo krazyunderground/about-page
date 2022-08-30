@@ -1,0 +1,20 @@
+{
+  "name": "@example/basics",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "devDependencies": {
+    "@astrojs/vercel": "^1.0.1",
+    "astro": "^1.1.1"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "discord.js": "^14.3.0"
+  }
+}

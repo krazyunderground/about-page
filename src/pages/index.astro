@@ -1,0 +1,128 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import axios from 'axios'
+
+const headers = {
+    'authorization': 'Bot NzQ0NTc5Nzc0Nzg5NDUxODM3.GGurbU.O0v8YhMT9jWkvJFXg32W7gds26LIJomIeIrCrM'
+}
+
+var avatar = new String()
+
+await axios.get('https://discord.com/api/users/576470929874616330', {
+    withCredentials: true,
+    headers: headers
+}).then((data) => {
+	avatar = `https://cdn.discordapp.com/avatars/576470929874616330/${data.data.avatar}.png?size=128`
+})
+
+
+---
+
+<Layout title="Based">
+	<main>
+		<div class="image-cropper">
+			<img class="rounded" src={avatar} alt="uhhh hello">
+		</div>
+		<h1 class="thanks">My name is <span class="text-gradient">Krazyunderground!</span></h1>
+		<p class="instructions">
+			I am a <code>programmer</code>, I can use:<br>
+			Javascript (Nodejs, Discord.js), Python, Java, C#, Lua, MongoDB, SQL and more!<br> <br>
+			I'd like to thing I can code well in most high-level backend languages (or at least learn them quickly)<br><br>
+			Im currently learning frontend, such as Astro (The thing I made this page with!)
+		</p>
+		<ul role="list" class="link-card-grid">
+			<Card
+				href="https://www.youtube.com/channel/UCLhY1CkcuaoBRmJWO5HLCKg"
+				title="Youtube"
+				body="Not much here, *yet*. In the future I may make coding tutorials, so keep an eye out for that"
+			/>
+			<Card
+				href="https://github.com/krazyunderground"
+				title="Github"
+				body="This is where I will upload most of my future projects for others to use"
+			/>
+		</ul>
+		<p class="thanks"><span class="text-gradient">Thanks for taking the time to read this!</span> 👋</p>
+	</main>
+</Layout>
+
+<style>
+	:root {
+		--astro-gradient: linear-gradient(15deg, #2d388a, #00aeef);
+	}
+
+	h1 {
+		margin: 2rem 0;
+	}
+
+	main {
+		margin: auto;
+		padding: 1em;
+		max-width: 80ch;
+	}
+
+	.text-gradient {
+		font-weight: 900;
+		background-image: var(--astro-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 100% 200%;
+		background-position-y: 100%;
+		border-radius: 0.4rem;
+		animation: pulse 5s ease-in-out infinite;
+	}
+
+	@keyframes pulse {
+		0%,
+		100% {
+			background-position-y: 0%;
+		}
+		50% {
+			background-position-y: 100%;
+		}
+	}
+
+	.instructions {
+		line-height: 1.6;
+		margin: 1rem 0;
+		background: var(--astro-gradient);
+		padding: 1rem;
+		border-radius: 0.4rem;
+		color: var(--color-bg);
+	}
+
+	.instructions code {
+		font-size: 0.875em;
+		border: 0.1em solid var(--color-border);
+		border-radius: 4px;
+		padding: 0.15em 0.25em;
+	}
+
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 1rem;
+		padding: 0;
+	}
+	
+	.thanks {
+		text-align: center;
+	}
+
+	.image-cropper {
+		margin: auto;
+		width: 128px;
+		height: 128px;
+		position: relative;
+		overflow: hidden;
+		border-radius: 50%;
+	}
+
+	.rounded {
+		display: inline;
+		margin: auto;
+		height: 100%;
+		width: auto;
+	}
+</style>
