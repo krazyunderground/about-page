@@ -1,29 +1,30 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import axios from 'axios'
+// import axios from 'axios'
 
-const headers = {
-    'authorization': 'Bot NzQ0NTc5Nzc0Nzg5NDUxODM3.GGurbU.O0v8YhMT9jWkvJFXg32W7gds26LIJomIeIrCrM'
-}
+// const headers = {
+//     'authorization': "no"
+// }
 
-var avatar = new String()
+// var avatar = new String()
 
-await axios.get('https://discord.com/api/users/576470929874616330', {
-    withCredentials: true,
-    headers: headers
-}).then((data) => {
-	avatar = `https://cdn.discordapp.com/avatars/576470929874616330/${data.data.avatar}.png?size=128`
-})
+// await axios.get('https://discord.com/api/users/576470929874616330', {
+//     withCredentials: true,
+//     headers: headers
+// }).then((data) => {
+// 	avatar = `https://cdn.discordapp.com/avatars/576470929874616330/${data.data.avatar}.png?size=128`
+// })
 
 
 ---
 
 <Layout title="Based">
 	<main>
-		<div class="image-cropper">
+		<!-- <div class="image-cropper">
 			<img class="rounded" src={avatar} alt="uhhh hello">
-		</div>
+		</div> -->
+		
 		<h1 class="thanks">My name is <span class="text-gradient">Krazyunderground!</span></h1>
 		<p class="instructions">
 			I am a <code>programmer</code>, I can use:<br>
