@@ -1,32 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-// import axios from 'axios'
+import axios from 'axios'
 
-// const headers = {
-//     'authorization': "no"
-// }
+var auth = `Bot ${import.meta.env.PUBLIC_AUTH_TOKEN}`
 
-// var avatar = new String()
+var avatar = ""
+var data = {}
 
-// await axios.get('https://discord.com/api/users/576470929874616330', {
-//     withCredentials: true,
-//     headers: headers
-// }).then((data) => {
-// 	avatar = `https://cdn.discordapp.com/avatars/576470929874616330/${data.data.avatar}.png?size=128`
-// })
+await axios.get('https://discord.com/api/users/576470929874616330', {
+    withCredentials: true,
+    headers: {authorization: auth}
+})
+.then((datares) => {
+	data = datares.data
+	avatar = `https://cdn.discordapp.com/avatars/576470929874616330/${datares.data.avatar}.png?size=128`
+})
 
 
 ---
 
 <Layout title="Based">
 	<main>
-		<!-- <div class="image-cropper">
-			<img class="rounded" src={avatar} alt="uhhh hello">
-		</div> -->
-		
-		<h1 class="thanks">My name is <span class="text-gradient">Krazyunderground!</span></h1>
-		<p class="instructions">
+		<div class="image-cropper">
+			<img class="rounded" src={avatar} alt="where my newest Discord PFP would be">
+		</div>
+		<p class="center">{data.username}#<span class="text-gradient">{data.discriminator}</span>
+			<br><span class="small-text">(PFP and tag should automatically update)</span>
+		</p>
+		<h1 class="center">My name is <span class="text-gradient">Krazyunderground!</span></h1>
+		<p class="text-block">
 			I am a <code>programmer</code>, I can use:<br>
 			Javascript (Nodejs, Discord.js), Python, Java, C#, Lua, MongoDB, SQL and more!<br> <br>
 			I'd like to thing I can code well in most high-level backend languages (or at least learn them quickly)<br><br>
@@ -44,7 +47,7 @@ import Card from '../components/Card.astro';
 				body="This is where I will upload most of my future projects for others to use"
 			/>
 		</ul>
-		<p class="thanks"><span class="text-gradient">Thanks for taking the time to read this!</span> 👋</p>
+		<p class="center"><span class="text-gradient">Thanks for taking the time to read this!</span> 👋</p>
 	</main>
 </Layout>
 
@@ -55,6 +58,7 @@ import Card from '../components/Card.astro';
 
 	h1 {
 		margin: 2rem 0;
+		font-size: 40px;
 	}
 
 	main {
@@ -84,7 +88,7 @@ import Card from '../components/Card.astro';
 		}
 	}
 
-	.instructions {
+	.text-block {
 		line-height: 1.6;
 		margin: 1rem 0;
 		background: var(--astro-gradient);
@@ -93,7 +97,7 @@ import Card from '../components/Card.astro';
 		color: var(--color-bg);
 	}
 
-	.instructions code {
+	.text-block code {
 		font-size: 0.875em;
 		border: 0.1em solid var(--color-border);
 		border-radius: 4px;
@@ -107,7 +111,7 @@ import Card from '../components/Card.astro';
 		padding: 0;
 	}
 	
-	.thanks {
+	.center {
 		text-align: center;
 	}
 
@@ -125,5 +129,9 @@ import Card from '../components/Card.astro';
 		margin: auto;
 		height: 100%;
 		width: auto;
+	}
+	
+	.small-text {
+		font-size: small;
 	}
 </style>
