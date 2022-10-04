@@ -6,6 +6,8 @@ import axios from 'axios'
 var auth = `Bot ${import.meta.env.PUBLIC_AUTH_TOKEN}`
 
 var avatar = ""
+var banner = ""
+var accent = ""
 var data = {}
 
 await axios.get('https://discord.com/api/users/576470929874616330', {
@@ -14,7 +16,10 @@ await axios.get('https://discord.com/api/users/576470929874616330', {
 })
 .then((datares) => {
 	data = datares.data
-	avatar = `https://cdn.discordapp.com/avatars/576470929874616330/${datares.data.avatar}.png?size=128`
+	console.log(data)
+	accent = datares.data.banner_color
+	avatar = `https://cdn.discordapp.com/avatars/576470929874616330/${datares.data.avatar}.gif?size=128`
+	banner = `https://cdn.discordapp.com/banners/576470929874616330/${datares.data.banner}.gif?size=4096`
 })
 
 
@@ -22,13 +27,14 @@ await axios.get('https://discord.com/api/users/576470929874616330', {
 
 <Layout title="Based">
 	<main>
-		<div class="image-cropper">
-			<img class="rounded" src={avatar} alt="where my newest Discord PFP would be">
+		<h1 class="center">My name is {data.username}#<span class="text-gradient">{data.discriminator}</span>!</h1>
+		<div class="container">
+			<img style="" src={banner} alt="Thingymabob">
+			<div class=" tag image-cropper">
+				<img class="rounded" src={avatar} alt="where my newest Discord PFP would be">
+			</div>
 		</div>
-		<p class="center">{data.username}#<span class="text-gradient">{data.discriminator}</span>
-			<br><span class="small-text">(PFP and tag should automatically update)</span>
-		</p>
-		<h1 class="center">My name is <span class="text-gradient">Krazyunderground!</span></h1>
+		<p class="center"><span class="small-text">(PFP, banner and tag should automatically update)</span></p>
 		<p class="text-block">
 			I am a <code>programmer</code>, I can use:<br>
 			Javascript (Nodejs, Discord.js), Python, Java, C#, Lua, MongoDB, SQL and more!<br> <br>
@@ -46,19 +52,14 @@ await axios.get('https://discord.com/api/users/576470929874616330', {
 				title="Github"
 				body="This is where I will upload most of my future projects for others to use"
 			/>
-			<Card 
-				href="http://antilang.uk.to"
-				title="Antilang"
-				body="My latest project, designed specifically for maintaining english-only rules"
-			/>
 		</ul>
 		<p class="center"><span class="text-gradient">Thanks for taking the time to read this!</span> 👋</p>
 	</main>
 </Layout>
 
-<style>
+<style define:vars={accent}>
 	:root {
-		--astro-gradient: linear-gradient(15deg, #2d388a, #00aeef);
+		--astro-gradient: linear-gradient(15deg, #0D2125, #f90404);
 	}
 
 	h1 {
@@ -139,4 +140,22 @@ await axios.get('https://discord.com/api/users/576470929874616330', {
 	.small-text {
 		font-size: small;
 	}
+
+	.container {
+		margin: auto;
+        width: 500px;
+        height: 200px;
+        position: relative;
+	}
+
+	.tag {
+		float: left;
+		position: absolute;
+		left: 186px;
+		top: 36px;
+		z-index: 1000;
+		background-color: #92AD40;
+		color: #FFFFFF;
+		font-weight: bold;
+    }
 </style>
